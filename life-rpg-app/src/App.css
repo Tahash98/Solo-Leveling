@@ -1,0 +1,733 @@
+/* Life RPG App - Red & Black Theme */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+.App {
+  min-height: 100vh;
+  background-color: #000000;
+  padding-bottom: 80px;
+}
+
+/* Header */
+.app-header {
+  background: linear-gradient(135deg, #ff2b2b, #7a1e1e);
+  padding: 15px 20px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(255, 43, 43, 0.3);
+  position: relative;
+}
+
+.app-header h1 {
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Tab Content */
+.tab-content {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Home Screen Styles */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.quote-section {
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  border: 2px solid #ff2b2b;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(255, 43, 43, 0.2);
+}
+
+.quote-section h3 {
+  color: #ff2b2b;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.quote-text {
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #e0e0e0;
+}
+
+.titles-section {
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  border: 2px solid #7a1e1e;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.titles-section h3 {
+  color: #ff2b2b;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.earned-titles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.title-badge {
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.title-common { background: linear-gradient(135deg, #4ade80, #22c55e); color: #000; }
+.title-rare { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: #fff; }
+.title-epic { background: linear-gradient(135deg, #a855f7, #7c3aed); color: #fff; }
+.title-legendary { background: linear-gradient(135deg, #f59e0b, #d97706); color: #000; }
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.action-button {
+  background: linear-gradient(135deg, #ff2b2b, #7a1e1e);
+  border: none;
+  border-radius: 12px;
+  padding: 15px 20px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 43, 43, 0.3);
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 43, 43, 0.4);
+}
+
+.today-quests {
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  border: 2px solid #7a1e1e;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.today-quests h3 {
+  color: #ff2b2b;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+/* Quest List Styles */
+.quest-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quest-item {
+  background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.quest-item:hover {
+  border-color: #ff2b2b;
+  box-shadow: 0 2px 10px rgba(255, 43, 43, 0.2);
+}
+
+.quest-item.completed {
+  background: linear-gradient(135deg, #1f4e1f, #2d5a2d);
+  border-color: #4ade80;
+}
+
+.quest-content {
+  flex: 1;
+}
+
+.quest-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.quest-details {
+  font-size: 14px;
+  color: #aaa;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.quest-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-complete {
+  background: linear-gradient(135deg, #4ade80, #22c55e);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 15px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-complete:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(74, 222, 128, 0.3);
+}
+
+.btn-edit, .btn-delete {
+  background: linear-gradient(135deg, #6b7280, #4b5563);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 15px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-delete {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.btn-edit:hover, .btn-delete:hover {
+  transform: translateY(-1px);
+}
+
+/* Add Button */
+.add-button {
+  background: linear-gradient(135deg, #ff2b2b, #7a1e1e);
+  border: none;
+  border-radius: 50px;
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  box-shadow: 0 4px 15px rgba(255, 43, 43, 0.4);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.add-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(255, 43, 43, 0.6);
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  border: 2px solid #ff2b2b;
+  border-radius: 15px;
+  padding: 25px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(255, 43, 43, 0.3);
+}
+
+.modal h2 {
+  color: #ff2b2b;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #444;
+  border-radius: 8px;
+  background: #2a2a2a;
+  color: #fff;
+  font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #ff2b2b;
+  box-shadow: 0 0 10px rgba(255, 43, 43, 0.3);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn-save {
+  background: linear-gradient(135deg, #ff2b2b, #7a1e1e);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel {
+  background: linear-gradient(135deg, #6b7280, #4b5563);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-save:hover, .btn-cancel:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Category Styles */
+.category-section {
+  margin-bottom: 25px;
+}
+
+.category-header {
+  background: linear-gradient(135deg, #ff2b2b, #7a1e1e);
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* War Styles */
+.war-item {
+  background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+  border: 2px solid #ff2b2b;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.war-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.war-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff2b2b;
+}
+
+.war-progress {
+  width: 100%;
+  height: 10px;
+  background: #444;
+  border-radius: 5px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.war-progress-bar {
+  height: 100%;
+  background: linear-gradient(135deg, #ff2b2b, #7a1e1e);
+  transition: width 0.3s ease;
+}
+
+.war-quests {
+  margin-top: 15px;
+}
+
+.war-quest-item {
+  background: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 8px;
+}
+
+/* Weapon Styles */
+.weapon-item {
+  background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.weapon-item:hover {
+  border-color: #ff2b2b;
+}
+
+.weapon-item.not-obtained::before {
+  content: '⏳';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+}
+
+.weapon-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.weapon-name {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.weapon-type {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.weapon-type.skill { background: #3b82f6; }
+.weapon-type.ability { background: #a855f7; }
+.weapon-type.matter { background: #f59e0b; color: #000; }
+
+/* Stats Styles */
+.stats-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.level-section {
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  border: 2px solid #ff2b2b;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.level-display {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff2b2b;
+  margin-bottom: 10px;
+}
+
+.xp-bar {
+  width: 100%;
+  height: 15px;
+  background: #444;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.xp-bar-fill {
+  height: 100%;
+  background: linear-gradient(135deg, #ff2b2b, #7a1e1e);
+  transition: width 0.3s ease;
+}
+
+.xp-text {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.stat-item {
+  background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+}
+
+.stat-icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.stat-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff2b2b;
+}
+
+/* Calendar Styles */
+.calendar-container {
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  border: 2px solid #7a1e1e;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-nav {
+  background: linear-gradient(135deg, #ff2b2b, #7a1e1e);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: white;
+  cursor: pointer;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 20px;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #2a2a2a;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 5px;
+}
+
+.calendar-day:hover {
+  background: #3a3a3a;
+}
+
+.calendar-day.today {
+  background: linear-gradient(135deg, #ff2b2b, #7a1e1e);
+}
+
+.calendar-day.has-quests {
+  border: 2px solid #4ade80;
+}
+
+.day-number {
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.quest-dots {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+
+.quest-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  border-top: 2px solid #ff2b2b;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  z-index: 100;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s ease;
+  padding: 5px;
+}
+
+.nav-item.active {
+  color: #ff2b2b;
+}
+
+.nav-item:hover {
+  color: #ff2b2b;
+}
+
+.nav-icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tab-content {
+    padding: 15px;
+  }
+  
+  .quick-actions {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .calendar-grid {
+    gap: 1px;
+  }
+  
+  .calendar-day {
+    padding: 2px;
+    font-size: 12px;
+  }
+  
+  .modal {
+    width: 95%;
+    padding: 20px;
+  }
+  
+  .nav-item {
+    font-size: 10px;
+  }
+  
+  .nav-icon {
+    font-size: 18px;
+  }
+}
+
+/* Loading and Empty States */
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #aaa;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #aaa;
+}
+
+.empty-state-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.mb-10 { margin-bottom: 10px; }
+.mb-15 { margin-bottom: 15px; }
+.mb-20 { margin-bottom: 20px; }
+.mt-10 { margin-top: 10px; }
+.mt-15 { margin-top: 15px; }
+.mt-20 { margin-top: 20px; }
