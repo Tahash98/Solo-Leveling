@@ -440,20 +440,33 @@ function App() {
           />
         )}
         
-        {currentTab === 'wars' && (
-          <WarsTab
-            wars={wars}
-            onEditWar={(war) => {
-              setEditingItem(war);
-              setShowWarModal(true);
-            }}
-            onDeleteWar={(warId) => {
-              setWars(prev => prev.filter(war => war.id !== warId));
-            }}
-            onAddQuestToWar={addQuestToWar}
-            onUpdateWarProgress={updateWarProgress}
-          />
-        )}
+                 {currentTab === 'wars' && (
+           <WarsTab
+             wars={wars}
+             onEditWar={(war) => {
+               setEditingItem(war);
+               setShowWarModal(true);
+             }}
+             onDeleteWar={(warId) => {
+               setWars(prev => prev.filter(war => war.id !== warId));
+             }}
+             onAddQuestToWar={addQuestToWar}
+             onUpdateWarProgress={updateWarProgress}
+             onCompleteWarQuest={(warId, questId) => {
+               setWars(prev => prev.map(war => {
+                 if (war.id === warId) {
+                   const updatedQuests = war.quests.map(q => 
+                     q.id === questId ? { ...q, completed: true } : q
+                   );
+                   const completedQuests = updatedQuests.filter(q => q.completed).length;
+                   const progress = updatedQuests.length > 0 ? (completedQuests / updatedQuests.length) * 100 : 0;
+                   return { ...war, quests: updatedQuests, progress, completed: progress === 100 };
+                 }
+                 return war;
+               }));
+             }}
+           />
+         )}
         
         {currentTab === 'weapons' && (
           <WeaponsTab
@@ -739,7 +752,7 @@ const CalendarTab = ({ quests, currentDate, selectedDate, onDateSelect, onNaviga
   );
 };
 
-const WarsTab = ({ wars, onEditWar, onDeleteWar, onAddQuestToWar, onUpdateWarProgress }) => (
+const WarsTab = ({ wars, onEditWar, onDeleteWar, onAddQuestToWar, onUpdateWarProgress, onCompleteWarQuest }) => (
   <div className="fade-in">
     {wars.length > 0 ? wars.map(war => (
       <div key={war.id} className="war-item">
@@ -776,9 +789,7 @@ const WarsTab = ({ wars, onEditWar, onDeleteWar, onAddQuestToWar, onUpdateWarPro
                                  {!quest.completed && (
                    <button 
                      className="btn-complete"
-                     onClick={() => {
-                       onUpdateWarProgress(war.id);
-                     }}
+                     onClick={() => onCompleteWarQuest(war.id, quest.id)}
                    >
                      Complete
                    </button>
